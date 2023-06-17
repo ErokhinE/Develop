@@ -1,3 +1,4 @@
+import 'package:demo12/screens/url_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:demo12/screens/account_screen.dart';
@@ -15,6 +16,26 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Главная страница'),
         actions: [
+          IconButton(
+            onPressed: () {
+              if ((user == null)) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const UrlScreen()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AccountScreen()),
+                );
+              }
+            },
+            icon: Icon(
+              Icons.pageview_outlined,
+              color: Colors.white,
+            ),
+          ),
           IconButton(
             onPressed: () {
               if ((user == null)) {

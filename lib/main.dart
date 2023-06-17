@@ -1,3 +1,4 @@
+// import 'package:demo12/screens/url_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:demo12/screens/account_screen.dart';
@@ -7,6 +8,7 @@ import 'package:demo12/screens/login_screen.dart';
 import 'package:demo12/screens/signup_screen.dart';
 import 'package:demo12/screens/verify_email_screen.dart';
 import 'package:demo12/services/firebase_streem.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
 
@@ -18,6 +20,11 @@ import 'firebase_options.dart';
 //    Сбросить пароль - Почта
 
 void main() async {
+  // init hive (database for url)
+  Hive.initFlutter();
+  // open a box (also hive)
+  await Hive.openBox('mybox');
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
