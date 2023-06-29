@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class SentimentRating extends StatelessWidget {
-  final double rating;
+class ErrorMessage extends StatelessWidget {
   final String header;
-  const SentimentRating({super.key, required this.rating, required this.header});
+  const ErrorMessage({super.key, required this.header});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
       height: 130,
+      width: 600,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: const Color(0xff101F36)),
@@ -18,13 +16,10 @@ class SentimentRating extends StatelessWidget {
       ),
       child: Column(
         children: [
-
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
 
           Text(
-            header,
+            'Error',
             style: const TextStyle(
               fontSize: 24,
               color: Colors.white,
@@ -39,19 +34,15 @@ class SentimentRating extends StatelessWidget {
             color: Color(0xffEBDFD7),
           ),
 
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
 
-          RatingBarIndicator(
-            rating: rating,
-            itemCount: 5,
-            itemBuilder: (context, index) =>
-                const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-            itemSize: 50,
+          Text(
+            header,
+            style: const TextStyle(
+              fontSize: 36,
+              color: Colors.white,
+            ),
           ),
-
         ],
       ),
     );

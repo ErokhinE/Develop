@@ -1,31 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'dart:convert';
+
 import 'package:demo12/screens/url_screen.dart';
+import 'package:flutter/material.dart';
+
 import 'package:demo12/widgets/comments_visualizer.dart';
+import 'package:demo12/widgets/navigation_button.dart';
+import 'package:demo12/widgets/number_comments.dart';
+import 'package:demo12/widgets/number_phrases.dart';
+import 'package:demo12/widgets/phrases_visualizer.dart';
 import 'package:demo12/widgets/sentiment_pie_chart.dart';
 import 'package:demo12/widgets/sentiment_rating.dart';
 import 'package:demo12/widgets/word_cloud.dart';
 import 'package:word_cloud/word_cloud_data.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:http/http.dart' as http;
 
-class VisualizationPage extends StatefulWidget {
-  const VisualizationPage({super.key});
+class VisualizationScreen extends StatefulWidget {
+  final String url;
+  const VisualizationScreen({super.key, required this.url});
 
   @override
-  State<VisualizationPage> createState() => _VisualizationPageState();
+  State<VisualizationScreen> createState() => _VisualizationScreenState();
 }
 
-class _VisualizationPageState extends State<VisualizationPage> {
+class _VisualizationScreenState extends State<VisualizationScreen> {
   // data for comments
-  List<List<dynamic>>? csvData;
   late bool _isLoading;
+  var _selectedIndexNavBar = 1;
+  var _navigationIsOpen = false;
+  List<List<dynamic>> analyzedDataComments = [];
+  Map<String, double> pieChartData = {};
+  final double overallRating = 2.75;
 
-  // overall rating
-  final double _rating = 2.75;
+  late WordCloudData wordCloudData;
 
-  late WordCloudData wcdata;
-
-  List<Map> word_list = [
+  List<Map> wordList = [
     {'word': 'Apple', 'value': 100},
     {'word': 'Samsung', 'value': 60},
     {'word': 'Intel', 'value': 55},
@@ -101,18 +110,59 @@ class _VisualizationPageState extends State<VisualizationPage> {
     {'word': 'KIA', 'value': 16},
   ];
 
-  // pie chart data
-  Map<String, double> pieChartData = {
-    "Positive": 50,
-    "Negative": 38,
-    "Neutral": 10,
-  };
+  Future<void> sendUrl() async {
+    const String url = "http://127.0.0.1:5000/api/data";
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {"url": widget.url},
+      );
+
+      List<dynamic> jsonData = jsonDecode(response.body);
+      double negative = 0, positive = 0, neutral = 0;
+
+      int it = 1;
+      for (var item in jsonData) {
+        List<dynamic> row = [];
+        String sentiment;
+        if (item['SentimentRating'] < 0) {
+          sentiment = 'negative';
+          negative++;
+        } else if (item['SentimentRating'] > 0) {
+          sentiment = 'positive';
+          positive++;
+        } else {
+          sentiment = 'neutral';
+          neutral++;
+        }
+        row.add(it.toString());
+        row.add(item['Comments']);
+        row.add(sentiment);
+        row.add(item['SentimentRating']);
+        analyzedDataComments.add(row);
+        it++;
+      }
+
+      pieChartData = {
+        "Positive": positive,
+        "Negative": negative,
+        "Neutral": neutral,
+      };
+
+      setState(() {
+        CommentsVisualizer(analyzedData: analyzedDataComments,);
+      });
+    } catch (exception) {
+      // print('Errors $exception');
+    }
+  }
 
   @override
   void initState() {
+    sendUrl();
 
     _isLoading = true;
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       setState(() {
         _isLoading = false;
       });
@@ -123,9 +173,10 @@ class _VisualizationPageState extends State<VisualizationPage> {
 
   @override
   Widget build(BuildContext context) {
-    wcdata = WordCloudData(data: word_list);
+    wordCloudData = WordCloudData(data: wordList);
 
     return Scaffold(
+      backgroundColor: const Color(0xffEBDFD7),
       body: _isLoading
           ? Center(
           child: CircularPercentIndicator(
@@ -134,87 +185,182 @@ class _VisualizationPageState extends State<VisualizationPage> {
             radius: 200,
             lineWidth: 40,
             percent: 1,
-            progressColor: Colors.black,
+            progressColor: const Color(0xff101F36),
             backgroundColor: Colors.black26,
             circularStrokeCap: CircularStrokeCap.round,
           ))
-          : Center(
-        child: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+          : Row(
+        children: [
+          SafeArea(
+            child: NavigationRail(
+              extended: _navigationIsOpen,
+              backgroundColor: const Color(0xff101F36),
+              destinations: const [
+                NavigationRailDestination(
+                  icon: Icon(Icons.search),
+                  label: Text('Analyze'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.insert_chart),
+                  label: Text('Visualization'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.layers),
+                  label: Text('Projects'),
+                ),
+              ],
 
-                const SizedBox(height: 50),
+              selectedIndex: _selectedIndexNavBar,
+              selectedLabelTextStyle: const TextStyle(color: Colors.white),
+              selectedIconTheme: const IconThemeData(color: Colors.black),
+              unselectedLabelTextStyle: TextStyle(color: Colors.grey.shade400),
+              unselectedIconTheme: const IconThemeData(color: Colors.white),
+              useIndicator: true,
+              indicatorColor: const Color(0xffEBDFD7),
+              groupAlignment: -0.5,
+              leading: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: NavigationButton(
+                  onTap: () {
+                    setState(() {
+                      _navigationIsOpen = _navigationIsOpen ? false : true;
+                    });
+                  }, isRight: _navigationIsOpen,
+                ),
+              ),
+              onDestinationSelected: (value) {
+                setState(() {
+                  _selectedIndexNavBar = value;
+                });
+                if (_selectedIndexNavBar == 0) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const UrlScreen()));
+                } else if (_selectedIndexNavBar == 1) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => VisualizationScreen(url: widget.url,)));
+                }
+              },
+            ),
+          ),
 
-                Column(
-                  children: [
-                    const Text(
-                      'Comments',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                        width: 500,
-                        height: 500,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+          Expanded(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  color: const Color(0xffEBDFD7),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const SizedBox(height: 100),
+
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 70,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                    width: 700,
+                                    height: 600,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xff101F36),
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(color: const Color(0xff101F36))),
+                                    child: SingleChildScrollView(
+                                        child: CommentsVisualizer(analyzedData: analyzedDataComments,))),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+
+                                  CommentsNumber(
+                                    header: 'Total comments',
+                                    numberOfComments: analyzedDataComments.length,
+                                  ),
+
+                                  const SizedBox(height: 20),
+
+                                  SentimentRating(
+                                    rating: overallRating,
+                                    header: 'Overall rating',
+                                  ),
+
+                                  const SizedBox(height: 20),
+
+                                  SentimentPieChart(
+                                    pieChartData: pieChartData,
+                                    header: 'Overall sentiment',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        child: const SingleChildScrollView(
-                            child: CommentsVisualizer())),
-                  ],
+
+                        const SizedBox(height: 50),
+
+                        Row(
+                          children: [
+
+                            const SizedBox(
+                              width: 70,
+                            ),
+
+                            Expanded(
+                              child: Column(
+                                children: [
+
+                                  const PhrasesNumber(header: 'Total phrases', numberOfPhrases: 20,),
+
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  WordCloud(
+                                    wcData: wordCloudData,
+                                    header: 'Word cloud',
+                                    width: 600,
+                                    height: 450,
+                                  ),
+
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(
+                              width: 30,
+                            ),
+
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: 500,
+                                      height: 600,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xff101F36),
+                                          borderRadius: BorderRadius.circular(16),
+                                          border: Border.all(color: const Color(0xff101F36))),
+                                      child: const SingleChildScrollView(
+                                          child: PhrasesVisualizer())),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 50),
+                      ]),
                 ),
-
-                const SizedBox(height: 50),
-
-                // word cloud
-                WordCloud(wcData: wcdata, header: 'Word cloud',),
-
-                const SizedBox(height: 50),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // negative word cloud
-                    WordCloud(wcData: wcdata, header: 'Negative word cloud',),
-
-                    const SizedBox(width: 40),
-
-                    // positive word cloud
-                    WordCloud(wcData: wcdata, header: 'Positive word cloud',),
-                  ],
-                ),
-
-                const SizedBox(height: 50),
-
-                SentimentPieChart(pieChartData: pieChartData, header: 'Overall sentiment'),
-
-                const SizedBox(height: 50),
-
-                // sentiment rating
-                SentimentRating(rating: _rating, header: 'Overall rating'),
-
-                const SizedBox(height: 50),
-              ]),
-        ),
-      ),
-
-      floatingActionButton: _isLoading
-          ? null
-          : FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const UrlScreen()));
-        },
-        backgroundColor: Colors.black,
-        child: const Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

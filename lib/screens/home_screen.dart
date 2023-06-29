@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 );
               }
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.pageview_outlined,
               color: Colors.white,
             ),

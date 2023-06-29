@@ -9,11 +9,12 @@ class SentimentPieChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
-      width: 350,
+      height: 290,
+      width: 400,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: const Color(0xff101F36)),
+        color: const Color(0xff101F36),
       ),
       child: Column(
         children: [
@@ -23,15 +24,16 @@ class SentimentPieChart extends StatelessWidget {
             header,
             style: const TextStyle(
               fontSize: 24,
+              color: Colors.white,
             ),
           ),
 
           const SizedBox(height: 5),
 
-          Divider(
+          const Divider(
             height: 10,
-            thickness: 0.5,
-            color: Colors.grey[500],
+            thickness: 2,
+            color: Color(0xffEBDFD7),
           ),
 
           const SizedBox(height: 35),
@@ -40,7 +42,7 @@ class SentimentPieChart extends StatelessWidget {
             dataMap: pieChartData,
             chartType: ChartType.ring,
             ringStrokeWidth: 60,
-            chartRadius: 200,
+            chartRadius: 140,
             colorList: const <Color>[
               Colors.green,
               Colors.red,

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CommentTile extends StatelessWidget {
-  final String comment;
+class PhraseTile extends StatelessWidget {
+  final String phrase;
   final String sentimentTag;
-  final int? id;
-  final double sentimentRating;
+  final int id;
+  final int count;
 
   // final String keyWords;
 
-  CommentTile({
+  PhraseTile({
     super.key,
-    required this.comment,
+    required this.phrase,
     required this.sentimentTag,
-    required this.sentimentRating,
+    required this.count,
     required this.id,
   });
 
@@ -38,7 +38,7 @@ class CommentTile extends StatelessWidget {
           bottom: 12,
         ),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.3),
+          color: getColor().withOpacity(0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -56,30 +56,18 @@ class CommentTile extends StatelessWidget {
             ),
             Expanded(
                 child: Text(
-              comment,
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                color: Colors.white,
-                fontSize: 14,
-                height: 1.5,
-              ),
-            )),
+                  phrase,
+                  style: TextStyle(
+                    decoration: TextDecoration.none,
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                )),
             const SizedBox(
               width: 20,
             ),
             Text(
-              sentimentTag,
-              style: TextStyle(
-                color: getColor(),
-                decoration: TextDecoration.none,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Text(
-              'Rating: $sentimentRating',
+              'Rating: $count',
               style: TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,

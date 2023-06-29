@@ -1,4 +1,5 @@
 // import 'package:demo12/screens/url_screen.dart';
+import 'package:demo12/screens/url_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:demo12/screens/account_screen.dart';
@@ -7,7 +8,7 @@ import 'package:demo12/screens/login_screen.dart';
 // import 'package:demo12/screens/reset_password_screen.dart';
 import 'package:demo12/screens/signup_screen.dart';
 import 'package:demo12/screens/verify_email_screen.dart';
-import 'package:demo12/services/firebase_streem.dart';
+// import 'package:demo12/services/firebase_streem.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
@@ -29,7 +30,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         }),
       ),
       routes: {
-        '/': (context) => const FirebaseStream(),
+        '/': (context) => const UrlScreen(),
         '/home': (context) => const HomeScreen(),
         '/account': (context) => const AccountScreen(),
         '/login': (context) => const LoginScreen(),
