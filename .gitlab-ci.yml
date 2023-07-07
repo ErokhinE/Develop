@@ -1,18 +1,43 @@
-image: cirrusci/flutter:latest
+#image: cirrusci/flutter:latest
 
-before_script:
-  - flutter channel beta
-  - flutter upgrade
-  - flutter config --enable-web
-  - flutter pub get
+#before_script:
+#  - flutter channel beta
+#  - flutter upgrade
+#  - flutter config --enable-web
+#  - flutter pub get
+
+build_and_test_web_app:
+  stage: build
+  image: cirrusci/flutter:stable
+  before_script:
+    - flutter pub get
+  script:
+    - flutter build web
+    - flutter analyze
+    - flutter test
+  artifacts:
+    paths:
+      - build/web
 
 pages:
   stage: deploy
   script:
-    - flutter build web --base-href "/vibechecker/"
     - cp -r build/web public
   artifacts:
     paths:
       - public
   only:
-    - live
+    - master
+
+
+
+#pages:
+#  stage: deploy
+#  script:
+#    - flutter build web --base-href "/vibechecker/"
+#    - cp -r build/web public
+#  artifacts:
+#    paths:
+#      - public
+#  only:
+#    - live
