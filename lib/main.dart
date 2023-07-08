@@ -1,4 +1,7 @@
 // import 'package:demo12/screens/url_screen.dart';
+import 'package:demo12/screens/about_us_screen.dart';
+import 'package:demo12/screens/contact_us_screen.dart';
+import 'package:demo12/screens/pricing_screen.dart';
 import 'package:demo12/screens/url_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,6 +56,9 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         // '/reset_password': (context) => const ResetPasswordScreen(),
         '/verify_email': (context) => const VerifyEmailScreen(),
+        '/about_us': (context) => const AboutUsScreen(),
+        '/contact_us': (context) => const ContactUsScreen(),
+        '/pricing': (context) => const PricingScreen(),
       },
       initialRoute: '/',
     );
