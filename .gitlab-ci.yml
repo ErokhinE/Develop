@@ -54,7 +54,6 @@ before_script:
   #  - npm i -g firebase-tools
   - git status
   - git fetch --all
-  - flutter channel beta
   - flutter upgrade
   - flutter config --enable-web
   - flutter pub get
