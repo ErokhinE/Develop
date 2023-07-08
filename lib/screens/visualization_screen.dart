@@ -162,10 +162,12 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
       overallRating = rating / it + 2;
 
       setState(() {
-        CommentsVisualizer(analyzedData: analyzedDataComments,);
+        CommentsVisualizer(
+          analyzedData: analyzedDataComments,
+        );
       });
 
-      print(pieChartData);
+      // print(pieChartData);
       return pieChartData;
     } catch (exception) {
       return {};
@@ -191,14 +193,14 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
       wordList = [];
 
       for (List<dynamic> item in decodedJson) {
-        Map mapItem = { 'word': item[0], 'value': item[1] };
+        Map mapItem = {'word': item[0], 'value': item[1]};
         wordList.add(mapItem);
       }
 
-      print(wordList);
+      // print(wordList);
       return "200";
     } catch (exception) {
-      print(404);
+      // print(404);
       return "";
       // print('Errors $exception');
     }
@@ -255,12 +257,15 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                               label: Text('Projects'),
                             ),
                           ],
-
                           selectedIndex: _selectedIndexNavBar,
-                          selectedLabelTextStyle: const TextStyle(color: Colors.white),
-                          selectedIconTheme: const IconThemeData(color: Colors.black),
-                          unselectedLabelTextStyle: TextStyle(color: Colors.grey.shade400),
-                          unselectedIconTheme: const IconThemeData(color: Colors.white),
+                          selectedLabelTextStyle:
+                              const TextStyle(color: Colors.white),
+                          selectedIconTheme:
+                              const IconThemeData(color: Colors.black),
+                          unselectedLabelTextStyle:
+                              TextStyle(color: Colors.grey.shade400),
+                          unselectedIconTheme:
+                              const IconThemeData(color: Colors.white),
                           useIndicator: true,
                           indicatorColor: const Color(0xffEBDFD7),
                           groupAlignment: -0.5,
@@ -269,9 +274,11 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                             child: NavigationButton(
                               onTap: () {
                                 setState(() {
-                                  _navigationIsOpen = _navigationIsOpen ? false : true;
+                                  _navigationIsOpen =
+                                      _navigationIsOpen ? false : true;
                                 });
-                              }, isRight: _navigationIsOpen,
+                              },
+                              isRight: _navigationIsOpen,
                             ),
                           ),
                           onDestinationSelected: (value) {
@@ -279,16 +286,17 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                               _selectedIndexNavBar = value;
                             });
                             if (_selectedIndexNavBar == 0) {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) => const UrlScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const UrlScreen()));
                             } else if (_selectedIndexNavBar == 1) {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) => VisualizationScreen(url: widget.url,)));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => VisualizationScreen(
+                                        url: widget.url,
+                                      )));
                             }
                           },
                         ),
                       ),
-
                       Expanded(
                         child: Center(
                           child: SingleChildScrollView(
@@ -298,13 +306,14 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     const SizedBox(height: 100),
-
                                     Row(
                                       children: [
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.05,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                         ),
-
                                         Expanded(
                                           child: Column(
                                             children: [
@@ -312,11 +321,19 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                                                   width: 700,
                                                   height: 600,
                                                   decoration: BoxDecoration(
-                                                      color: const Color(0xff101F36),
-                                                      borderRadius: BorderRadius.circular(16),
-                                                      border: Border.all(color: const Color(0xff101F36))),
+                                                      color: const Color(
+                                                          0xff101F36),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
+                                                      border: Border.all(
+                                                          color: const Color(
+                                                              0xff101F36))),
                                                   child: SingleChildScrollView(
-                                                      child: CommentsVisualizer(analyzedData: analyzedDataComments,))),
+                                                      child: CommentsVisualizer(
+                                                    analyzedData:
+                                                        analyzedDataComments,
+                                                  ))),
                                             ],
                                           ),
                                         ),
@@ -326,10 +343,10 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                                         Expanded(
                                           child: Column(
                                             children: [
-
                                               CommentsNumber(
                                                 header: 'Total comments',
-                                                numberOfComments: analyzedDataComments.length,
+                                                numberOfComments:
+                                                    analyzedDataComments.length,
                                               ),
 
                                               const SizedBox(height: 20),
@@ -350,47 +367,53 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                                             ],
                                           ),
                                         ),
-
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.01,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.01,
                                         ),
                                       ],
                                     ),
-
                                     const SizedBox(height: 50),
-
                                     Row(
                                       children: [
-
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.05,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                         ),
-
                                         Expanded(
                                           child: Column(
                                             children: [
-
-                                              PhrasesNumber(header: 'Total phrases', numberOfPhrases: phraseList.length, width: MediaQuery.of(context).size.width * 0.4,),
-
+                                              PhrasesNumber(
+                                                header: 'Total phrases',
+                                                numberOfPhrases:
+                                                    phraseList.length,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.4,
+                                              ),
                                               const SizedBox(
                                                 height: 20,
                                               ),
-
                                               WordCloud(
                                                 wcData: wordCloudData,
                                                 header: 'Word cloud',
-                                                width: MediaQuery.of(context).size.width * 0.4,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.4,
                                                 height: 450,
                                               ),
-
                                             ],
                                           ),
                                         ),
-
                                         const SizedBox(
                                           width: 30,
                                         ),
-
                                         Expanded(
                                           child: Column(
                                             children: [
@@ -398,21 +421,29 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                                                   width: 500,
                                                   height: 600,
                                                   decoration: BoxDecoration(
-                                                      color: const Color(0xff101F36),
-                                                      borderRadius: BorderRadius.circular(16),
-                                                      border: Border.all(color: const Color(0xff101F36))),
+                                                      color: const Color(
+                                                          0xff101F36),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16),
+                                                      border: Border.all(
+                                                          color: const Color(
+                                                              0xff101F36))),
                                                   child: SingleChildScrollView(
-                                                      child: PhrasesVisualizer(wordListData: phraseList,))),
+                                                      child: PhrasesVisualizer(
+                                                    wordListData: phraseList,
+                                                  ))),
                                             ],
                                           ),
                                         ),
-
                                         SizedBox(
-                                          width: MediaQuery.of(context).size.width * 0.05,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                         ),
                                       ],
                                     ),
-
                                     const SizedBox(height: 50),
                                   ]),
                             ),
@@ -423,15 +454,14 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                   ),
                 );
               } else {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
             },
           );
         } else {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );
-
   }
 }

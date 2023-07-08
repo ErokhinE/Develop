@@ -14,7 +14,7 @@ class _CommentsVisualizerState extends State<CommentsVisualizer> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         widget.analyzedData == []
+        widget.analyzedData == []
             ? const CircularProgressIndicator()
             : ListView.builder(
                 itemCount: widget.analyzedData?.length,

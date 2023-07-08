@@ -9,14 +9,15 @@ class AnalyzeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 45, vertical:30)),
+        padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 45, vertical: 30)),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         )),
-        backgroundColor: MaterialStateProperty.all(Color(0xff220F58)),
+        backgroundColor: MaterialStateProperty.all(const Color(0xff220F58)),
       ),
       onPressed: onTap,
-      child: Text(
+      child: const Text(
         "Analyze",
         style: TextStyle(
           color: Colors.white,

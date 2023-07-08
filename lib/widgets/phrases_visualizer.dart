@@ -13,7 +13,7 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
   List<List<dynamic>>? csvData = [
     [1, 'amazing', 'positive', 6],
     [2, 'hate', 'negative', 4],
-    [3,'love','positive',1],
+    [3, 'love', 'positive', 1],
   ];
 
   @override
@@ -21,10 +21,10 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
     return Column(
       children: [
         const SizedBox(height: 10),
-
         const Row(
           children: [
-            Expanded(child: Padding(
+            Expanded(
+                child: Padding(
               padding: EdgeInsets.only(left: 70.0),
               child: Text(
                 'Phrase',
@@ -47,35 +47,28 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
             ),
           ],
         ),
-
         const SizedBox(height: 10),
-
         const Divider(
           height: 10,
           thickness: 2,
           color: Color(0xffEBDFD7),
         ),
-
         const SizedBox(height: 10),
-
         widget.wordListData == []
             ? const CircularProgressIndicator()
             : ListView.builder(
-          itemCount: widget.wordListData?.length,
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            print(widget.wordListData?[index]);
-            print(index);
-            print(widget.wordListData?[9]);
-            return PhraseTile(
-              id: index+1,
-              phrase: widget.wordListData?[index][0],
-              sentimentTag: widget.wordListData?[index][3],
-              count: widget.wordListData?[index][1],
-            );
-          },
-        ),
+                itemCount: widget.wordListData?.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return PhraseTile(
+                    id: index + 1,
+                    phrase: widget.wordListData?[index][0],
+                    sentimentTag: widget.wordListData?[index][3],
+                    count: widget.wordListData?[index][1],
+                  );
+                },
+              ),
       ],
     );
   }

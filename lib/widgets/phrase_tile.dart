@@ -8,7 +8,7 @@ class PhraseTile extends StatelessWidget {
 
   // final String keyWords;
 
-  PhraseTile({
+  const PhraseTile({
     super.key,
     required this.phrase,
     required this.sentimentTag,
@@ -45,7 +45,7 @@ class PhraseTile extends StatelessWidget {
           children: [
             Text(
               '$id',
-              style: TextStyle(
+              style: const TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
                 fontSize: 14,
@@ -56,19 +56,19 @@ class PhraseTile extends StatelessWidget {
             ),
             Expanded(
                 child: Text(
-                  phrase,
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                )),
+              phrase,
+              style: const TextStyle(
+                decoration: TextDecoration.none,
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            )),
             const SizedBox(
               width: 20,
             ),
             Text(
               '$count',
-              style: TextStyle(
+              style: const TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
                 fontSize: 14,

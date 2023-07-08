@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordTextInputController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      // print(e.code);
 
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         SnackBarService.showSnackBar(
@@ -82,9 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 autocorrect: false,
                 controller: emailTextInputController,
                 validator: (email) =>
-                email != null && !EmailValidator.validate(email)
-                    ? 'Введите правильный Email'
-                    : null,
+                    email != null && !EmailValidator.validate(email)
+                        ? 'Введите правильный Email'
+                        : null,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Введите Email',

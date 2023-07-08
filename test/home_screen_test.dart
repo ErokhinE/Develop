@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Url screen should lead to visualization page', (tester) async {
     const url = 'https://www.youtube.com/watch?v=peloHl5sb4I';
-    await tester.pumpWidget(UrlScreen());
+    await tester.pumpWidget(const UrlScreen());
 
     await tester.enterText(find.byType(TextField), url);
 

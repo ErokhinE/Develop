@@ -4,7 +4,8 @@ import 'package:pie_chart/pie_chart.dart';
 class SentimentPieChart extends StatelessWidget {
   final Map<String, double> pieChartData;
   final String header;
-  const SentimentPieChart({super.key, required this.pieChartData, required this.header});
+  const SentimentPieChart(
+      {super.key, required this.pieChartData, required this.header});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,6 @@ class SentimentPieChart extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-
           Text(
             header,
             style: const TextStyle(
@@ -27,17 +27,13 @@ class SentimentPieChart extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 5),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 35),
-
           PieChart(
             dataMap: pieChartData,
             chartType: ChartType.ring,

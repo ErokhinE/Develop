@@ -8,7 +8,7 @@ class CommentTile extends StatelessWidget {
 
   // final String keyWords;
 
-  CommentTile({
+  const CommentTile({
     super.key,
     required this.comment,
     required this.sentimentTag,
@@ -45,7 +45,7 @@ class CommentTile extends StatelessWidget {
           children: [
             Text(
               '$id',
-              style: TextStyle(
+              style: const TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
                 fontSize: 14,
@@ -57,7 +57,7 @@ class CommentTile extends StatelessWidget {
             Expanded(
                 child: Text(
               comment,
-              style: TextStyle(
+              style: const TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
                 fontSize: 14,
@@ -80,7 +80,7 @@ class CommentTile extends StatelessWidget {
             ),
             Text(
               'Rating: $sentimentRating',
-              style: TextStyle(
+              style: const TextStyle(
                 decoration: TextDecoration.none,
                 color: Colors.white,
                 fontSize: 14,

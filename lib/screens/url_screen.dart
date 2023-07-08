@@ -20,8 +20,6 @@ class _UrlScreenState extends State<UrlScreen> {
   var navigationIsOpen = false;
   late String url;
 
-  void analyze() {}
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -31,7 +29,6 @@ class _UrlScreenState extends State<UrlScreen> {
           children: [
             Row(
               children: [
-
                 SafeArea(
                   child: NavigationRail(
                     extended: navigationIsOpen,
@@ -52,10 +49,13 @@ class _UrlScreenState extends State<UrlScreen> {
                     ],
                     minExtendedWidth: 300,
                     selectedIndex: selectedIndex,
-                    selectedLabelTextStyle: const TextStyle(color: Colors.white),
+                    selectedLabelTextStyle:
+                        const TextStyle(color: Colors.white),
                     selectedIconTheme: const IconThemeData(color: Colors.black),
-                    unselectedLabelTextStyle: TextStyle(color: Colors.grey.shade400),
-                    unselectedIconTheme: const IconThemeData(color: Colors.white),
+                    unselectedLabelTextStyle:
+                        TextStyle(color: Colors.grey.shade400),
+                    unselectedIconTheme:
+                        const IconThemeData(color: Colors.white),
                     useIndicator: true,
                     indicatorColor: const Color(0xffEBDFD7),
                     groupAlignment: -0.5,
@@ -63,8 +63,11 @@ class _UrlScreenState extends State<UrlScreen> {
                       padding: const EdgeInsets.only(top: 100.0),
                       child: NavigationButton(
                         onTap: () {
-                          setState(() {navigationIsOpen = navigationIsOpen ? false : true;});
-                        }, isRight: navigationIsOpen,
+                          setState(() {
+                            navigationIsOpen = navigationIsOpen ? false : true;
+                          });
+                        },
+                        isRight: navigationIsOpen,
                       ),
                     ),
                     onDestinationSelected: (value) {
@@ -75,24 +78,21 @@ class _UrlScreenState extends State<UrlScreen> {
                         url = urlController.text;
                       }
                       if (selectedIndex == 0) {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => const UrlScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const UrlScreen()));
                       } else if (selectedIndex == 1) {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => VisualizationScreen(url: url,)));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => VisualizationScreen(
+                                  url: url,
+                                )));
                       }
                     },
                   ),
                 ),
-
-
-
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 25),
-                    decoration: const BoxDecoration(
-                        color: Color(0xffEBDFD7)
-                    ),
+                    decoration: const BoxDecoration(color: Color(0xffEBDFD7)),
                     child: Center(
                       child: Container(
                         width: 930,
@@ -138,7 +138,8 @@ class _UrlScreenState extends State<UrlScreen> {
                             const SizedBox(height: 85),
 
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 45),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 45),
                               child: MyTextField(
                                 controller: urlController,
                                 hintText: 'Youtube URL',
@@ -147,11 +148,15 @@ class _UrlScreenState extends State<UrlScreen> {
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 70.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 70.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  IconButton(onPressed: () {}, icon: const Icon(Icons.tune)),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.tune)),
                                   Text('$numberOfComments comments'),
                                 ],
                               ),
@@ -166,8 +171,10 @@ class _UrlScreenState extends State<UrlScreen> {
                               padding: const EdgeInsets.only(right: 70),
                               child: AnalyzeButton(onTap: () {
                                 url = urlController.text;
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => VisualizationScreen(url: url,)));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => VisualizationScreen(
+                                          url: url,
+                                        )));
                               }),
                             ),
                           ],

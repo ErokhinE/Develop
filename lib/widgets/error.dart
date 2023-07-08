@@ -17,25 +17,20 @@ class ErrorMessage extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-
-          Text(
+          const Text(
             'Error',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 5),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 10),
-
           Text(
             header,
             style: const TextStyle(

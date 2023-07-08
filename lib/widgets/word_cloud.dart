@@ -6,7 +6,12 @@ class WordCloud extends StatelessWidget {
   final String header;
   final double width;
   final double height;
-  const WordCloud({super.key, required this.wcData, required this.header, required this.width, required this.height});
+  const WordCloud(
+      {super.key,
+      required this.wcData,
+      required this.header,
+      required this.width,
+      required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,6 @@ class WordCloud extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-
           Text(
             header,
             style: const TextStyle(
@@ -31,17 +35,13 @@ class WordCloud extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 15),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 5),
-
           WordCloudView(
             data: wcData,
             mapwidth: width - 40,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CommentsNumber extends StatelessWidget {
   final String header;
   final int numberOfComments;
-  const CommentsNumber({super.key, required this.header, required this.numberOfComments});
+  const CommentsNumber(
+      {super.key, required this.header, required this.numberOfComments});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,6 @@ class CommentsNumber extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-
           Text(
             header,
             style: const TextStyle(
@@ -26,17 +26,13 @@ class CommentsNumber extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 5),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 10),
-
           Text(
             '$numberOfComments',
             style: const TextStyle(

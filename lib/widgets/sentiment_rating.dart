@@ -4,7 +4,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class SentimentRating extends StatelessWidget {
   final double rating;
   final String header;
-  const SentimentRating({super.key, required this.rating, required this.header});
+  const SentimentRating(
+      {super.key, required this.rating, required this.header});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,9 @@ class SentimentRating extends StatelessWidget {
       ),
       child: Column(
         children: [
-
           const SizedBox(
             height: 10,
           ),
-
           Text(
             header,
             style: const TextStyle(
@@ -30,28 +29,22 @@ class SentimentRating extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 5),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 5),
-
           RatingBarIndicator(
             rating: rating,
             itemCount: 4,
-            itemBuilder: (context, index) =>
-                const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
+            itemBuilder: (context, index) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
             itemSize: 50,
           ),
-
         ],
       ),
     );

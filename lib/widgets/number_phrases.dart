@@ -4,7 +4,11 @@ class PhrasesNumber extends StatelessWidget {
   final String header;
   final double width;
   final int numberOfPhrases;
-  const PhrasesNumber({super.key, required this.header, required this.numberOfPhrases, required this.width});
+  const PhrasesNumber(
+      {super.key,
+      required this.header,
+      required this.numberOfPhrases,
+      required this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,6 @@ class PhrasesNumber extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-
           Text(
             header,
             style: const TextStyle(
@@ -27,17 +30,13 @@ class PhrasesNumber extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 5),
-
           const Divider(
             height: 10,
             thickness: 2,
             color: Color(0xffEBDFD7),
           ),
-
           const SizedBox(height: 10),
-
           Text(
             '$numberOfPhrases',
             style: const TextStyle(

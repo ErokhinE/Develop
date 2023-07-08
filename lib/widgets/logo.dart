@@ -14,7 +14,7 @@ class Logo extends StatelessWidget {
             Text(
               "VibeChecker",
               style: GoogleFonts.pacifico(
-                fontSize: 50,
+                  fontSize: 50,
                   shadows: <Shadow>[
                     const Shadow(
                       offset: Offset(0, 5),
@@ -25,8 +25,7 @@ class Logo extends StatelessWidget {
                   foreground: Paint()
                     ..style = PaintingStyle.stroke
                     ..strokeWidth = 5
-                    ..color = Colors.white
-              ),
+                    ..color = Colors.white),
             ),
             Text(
               "VibeChecker",

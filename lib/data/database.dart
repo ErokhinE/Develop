@@ -108,9 +108,7 @@ class WordCloudDataBase {
       {'word': 'Hyundai', 'value': 10},
       {'word': 'KIA', 'value': 16},
     ];
-    negativeWordCloudList = [
-
-    ];
+    negativeWordCloudList = [];
     positiveWordCloudList = [];
   }
 
