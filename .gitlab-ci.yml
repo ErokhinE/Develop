@@ -92,18 +92,6 @@ deploy-job:      # This job runs in the deploy stage.
     - echo "Deploying application..."
     - echo "Application successfully deployed."
 
-generate-skia-shaders-cache:
-  image: volkovpishet/flutter-android:1
-  stage: build:prepare
-  when: manual
-  cache:
-    policy: push
-    paths:
-      - flutter_shaders_warm_up_data.sksl.json
-  script:
-    - run-emulator
-    - fvm flutter drive --profile --cache-sksl --purge-persistent-cache --write-sksl-on-exit flutter_shaders_warm_up_data.sksl.json --driver=test_driver/integration_test.dart --target=test/shaders_warm_up_test.dart
-
 tests:
   stage: check:tests
   script:
