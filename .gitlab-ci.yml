@@ -80,9 +80,11 @@ dart-formatter-and-analyzer: # Analog of lint test job
 
 unit-test:
   stage: test
+  image: cirrusci/flutter:stable
   interruptible: true
   script:
     - echo "Running unit tests... This will take about 60 seconds."
+    - flutter packages get
     - flutter test --no-pub
     - echo "Code coverage is 90%"
 
