@@ -108,3 +108,4 @@ tests:
   stage: check:tests
   script:
     - flutter test
+    - echo "hello"
