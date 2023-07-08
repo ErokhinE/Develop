@@ -63,8 +63,7 @@ stages:        # List of stages for jobs, and their order of execution
 ##  - flutter channel beta
 
 before_script:
-  - apt-get update -y
-  - apt-get install -y curl unzip
+  - flutter pub get
 
 cache:
   paths:
