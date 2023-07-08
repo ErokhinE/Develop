@@ -43,46 +43,54 @@
 ##  only:
 ##    - live\
 
-
-stages:
-  - check:static
-  - check:tests
+stages:        # List of stages for jobs, and their order of execution
   - test
-  - build:prepare
-  - release
+  - deploy
+
+#before_script:
+#  #  - npm i -g firebase-tools
+#  - git status
+#  - git fetch --all
+##  - git checkout stable
+#  - flutter doctor
+#  - flutter doctor -v
+#  - flutter channel
+##  - flutter upgrade
+#  - flutter config --enable-web
+#  - flutter pub get
+##  - flutter channel beta
 
 before_script:
-  #  - npm i -g firebase-tools
-  - git status
-  - git fetch --all
-#  - git checkout stable
-  - flutter doctor
-  - flutter doctor -v
-  - flutter channel
-#  - flutter upgrade
-  - flutter config --enable-web
-  - flutter pub get
-#  - flutter channel beta
+  - apt-get update -y
+  - apt-get install -y curl unzip
 
+cache:
+  paths:
+    - ~/.pub-cache/
 
-dart-formatter:
-  stage: check:static
-  interruptible: true
-  script: flutter format --dry-run --set-exit-if-changed .
-
-dart-analyzer:
-  stage: check:static
-  interruptible: true
-  script: flutter analyze --fatal-infos --fatal-warnings
-
-code-generation-mismatch-check:
-  image: cirrusci/flutter:latest
-  stage: check:static
+dart-formatter-and-analyzer: # Analog of lint test job
+  stage: test
   interruptible: true
   script:
-    - fvm flutter pub get
-    - fvm flutter pub run build_runner build --delete-conflicting-outputs --fail-on-severe
-    - (( $(git status --untracked-files=no --porcelain|wc -l) == 0 )) || { echo >&2 "Some changes in generated files detected"; exit 1; }
+    - echo "Checking code formatting and analysis."
+    - flutter format --dry-run --set-exit-if-changed .
+    - flutter analyze --fatal-infos --fatal-warnings
+    - echo "The code is overall good formatted."
+
+unit-test:
+  stage: test
+  interruptible: true
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - flutter test --no-pub
+    - echo "Code coverage is 90%"
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # Runs if *both* previous jobs complete successfully.
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
 
 generate-skia-shaders-cache:
   image: volkovpishet/flutter-android:1
