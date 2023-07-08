@@ -47,6 +47,7 @@
 stages:
   - check:static
   - check:tests
+  - test
   - build:prepare
   - release
 
@@ -61,26 +62,15 @@ before_script:
 #  - flutter upgrade
   - flutter config --enable-web
   - flutter pub get
-  - flutter channel beta
+#  - flutter channel beta
 
-# default rules for jobs execution
-workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: always
-    - if: '$CI_COMMIT_TAG'
-      when: always
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
 
 dart-formatter:
-  image: cirrusci/flutter:latest
   stage: check:static
   interruptible: true
   script: flutter format --dry-run --set-exit-if-changed .
 
 dart-analyzer:
-  image: cirrusci/flutter:latest
   stage: check:static
   interruptible: true
   script: flutter analyze --fatal-infos --fatal-warnings
@@ -107,7 +97,6 @@ generate-skia-shaders-cache:
     - fvm flutter drive --profile --cache-sksl --purge-persistent-cache --write-sksl-on-exit flutter_shaders_warm_up_data.sksl.json --driver=test_driver/integration_test.dart --target=test/shaders_warm_up_test.dart
 
 tests:
-  image: volkovpishet/flutter-base:1
   stage: check:tests
   script:
-    - fvm flutter test
+    - flutter test
