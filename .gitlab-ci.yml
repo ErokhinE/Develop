@@ -54,7 +54,7 @@ before_script:
   #  - npm i -g firebase-tools
   - git status
   - git fetch --all
-  - git checkout stable
+#  - git checkout stable
   - flutter doctor
   - flutter doctor -v
   - flutter upgrade
