@@ -76,6 +76,7 @@ dart-formatter-and-analyzer: # Analog of lint test job
   script:
     - echo "Checking code formatting and analysis."
     - dart format lib
+    - cd ../../developer/vibe_checker/vibe_checker/
     - flutter analyze --fatal-infos --fatal-warnings
     - echo "The code is overall good formatted."
 
