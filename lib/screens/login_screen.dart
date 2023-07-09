@@ -78,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               TextFormField(
+                key: const Key('emailField'),
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 controller: emailTextInputController,
@@ -92,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 30),
               TextFormField(
+                key: const Key('passwordField'),
                 autocorrect: false,
                 controller: passwordTextInputController,
                 obscureText: isHiddenPassword,

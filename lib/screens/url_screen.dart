@@ -155,7 +155,26 @@ class _UrlScreenState extends State<UrlScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                  'Number of comments'),
+                                              content: const Text(
+                                                  'write number of comments'),
+                                              actions: [
+                                                TextButton(
+                                                  child: const Text("Cancel"),
+                                                  onPressed: () {},
+                                                ),
+                                                TextButton(
+                                                  child: const Text("Apply"),
+                                                  onPressed: () {},
+                                                ),
+                                              ],
+                                            );
+                                          }),
                                       icon: const Icon(Icons.tune)),
                                   Text('$numberOfComments comments'),
                                 ],
