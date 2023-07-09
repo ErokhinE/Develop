@@ -21,8 +21,6 @@ class _UrlScreenState extends State<UrlScreen> {
   var navigationIsOpen = false;
   late String url;
 
-  void analyze() {}
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
