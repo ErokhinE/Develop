@@ -1,4 +1,4 @@
-stages:        # List of stages for jobs, and their order of execution
+stages:
   - test
   - build
   - deploy
@@ -17,7 +17,7 @@ build_and_test_web_app:
     paths:
       - build/web
 
-lint-test-job: # Analog of lint test job
+lint-test-job:
   stage: test
   image: cirrusci/flutter:stable
   interruptible: true
@@ -41,8 +41,8 @@ unit-test-job:
     - flutter test
     - echo "Code coverage is 90%"
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # Runs if *both* previous jobs complete successfully.
+deploy-job:
+  stage: deploy
   environment: production
   script:
     - echo "Deploying application..."
