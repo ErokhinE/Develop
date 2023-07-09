@@ -5,6 +5,7 @@ import 'package:vibe_checker/widgets/analyze_button.dart';
 import 'package:vibe_checker/widgets/logo.dart';
 import 'package:vibe_checker/widgets/my_textfield.dart';
 import 'package:vibe_checker/widgets/navigation_button.dart';
+import 'package:vibe_checker/widgets/navbar.dart';
 
 class UrlScreen extends StatefulWidget {
   const UrlScreen({super.key});
@@ -94,110 +95,133 @@ class _UrlScreenState extends State<UrlScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     decoration: const BoxDecoration(color: Color(0xffEBDFD7)),
                     child: Center(
-                      child: Container(
-                        width: 930,
-                        height: 620,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          color: Colors.white.withOpacity(0.7),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 70),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          NavigationPanel(onTap: () {}),
+                          Container(
+                            width: 930,
+                            height: 590,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 30),
 
-                            Container(
-                              alignment: Alignment.topLeft,
-                              padding: const EdgeInsets.only(left: 70),
-                              child: Text(
-                                'Welcome to VibeChecker',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 20,
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  padding: const EdgeInsets.only(left: 70),
+                                  child: Text(
+                                    'Welcome to VibeChecker',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
 
-                            const SizedBox(height: 20),
+                                const SizedBox(height: 20),
 
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(left: 70),
-                              child: Text(
-                                'Enter an url to analyze a video from Youtube',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w500,
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: const EdgeInsets.only(left: 70),
+                                  child: Text(
+                                    'Enter an url to analyze a video from Youtube',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            // logo
-                            // Logo(),
+                                // logo
+                                // Logo(),
 
-                            const SizedBox(height: 85),
+                                const SizedBox(height: 85),
 
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 45),
-                              child: MyTextField(
-                                controller: urlController,
-                                hintText: 'Youtube URL',
-                                obscure: false,
-                              ),
-                            ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 45),
+                                  child: MyTextField(
+                                    controller: urlController,
+                                    hintText: 'Youtube URL',
+                                    obscure: false,
+                                  ),
+                                ),
 
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 70.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconButton(
-                                      onPressed: () => showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  'Number of comments'),
-                                              content: const Text(
-                                                  'write number of comments'),
-                                              actions: [
-                                                TextButton(
-                                                  child: const Text("Cancel"),
-                                                  onPressed: () {},
-                                                ),
-                                                TextButton(
-                                                  child: const Text("Apply"),
-                                                  onPressed: () {},
-                                                ),
-                                              ],
-                                            );
-                                          }),
-                                      icon: const Icon(Icons.tune)),
-                                  Text('$numberOfComments comments'),
-                                ],
-                              ),
-                            ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 70.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () => showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Number of comments'),
+                                                  content: const Text(
+                                                      'write number of comments'),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: const Text("Cancel"),
+                                                      onPressed: () {},
+                                                    ),
+                                                    TextButton(
+                                                      child: const Text("Apply"),
+                                                      onPressed: () {},
+                                                    ),
+                                                  ],
+                                                );
+                                              }),
+                                          icon: const Icon(Icons.tune)),
+                                      Text('$numberOfComments comments'),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 70.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(Icons.tune)),
+                                      Text('$numberOfComments comments'),
+                                    ],
+                                  ),
+                                ),
 
-                            const SizedBox(
-                              height: 20,
-                            ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
 
-                            Container(
-                              alignment: Alignment.topRight,
-                              padding: const EdgeInsets.only(right: 70),
-                              child: AnalyzeButton(onTap: () {
-                                url = urlController.text;
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => VisualizationScreen(
-                                          url: url,
-                                        )));
-                              }),
+                                Container(
+                                  alignment: Alignment.topRight,
+                                  padding: const EdgeInsets.only(right: 70),
+                                  child: AnalyzeButton(onTap: () {
+                                    url = urlController.text;
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VisualizationScreen(
+                                                  url: url,
+                                                )));
+                                  }),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
                       ),
                     ),
                   ),
@@ -205,7 +229,7 @@ class _UrlScreenState extends State<UrlScreen> {
               ],
             ),
             const Positioned(
-              top: 10,
+              top: 0,
               left: 15,
               child: Logo(),
             ),
