@@ -60,6 +60,8 @@ stages:        # List of stages for jobs, and their order of execution
 #  - flutter pub get
 ##  - flutter channel beta
 
+image: cirrusci/flutter:latest
+
 before_script:
   - flutter pub get
 
