@@ -88,7 +88,7 @@ unit-test:
     - flutter test --no-pub
     - echo "Code coverage is 90%"
 
-deploy-job:      # This job runs in the deploy stage
+deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # Runs if *both* previous jobs complete successfully.
   environment: production
   script:
