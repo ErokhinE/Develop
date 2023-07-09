@@ -1,9 +1,9 @@
 stages:
-  - test
   - build
+  - test
   - deploy
 
-build_and_test_web_app:
+build-job:
   stage: build
   image: cirrusci/flutter:stable
   before_script:
