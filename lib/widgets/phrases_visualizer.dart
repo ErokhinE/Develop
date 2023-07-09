@@ -21,8 +21,8 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        Row(
-          children: const [
+        const Row(
+          children: [
             Expanded(
                 child: Padding(
               padding: EdgeInsets.only(left: 70.0),
