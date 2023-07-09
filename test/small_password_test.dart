@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vibe_checker/screens/login_screen.dart';
 
 void main() {
-  testWidgets('User enter password with less than 6 symbols in login page', (tester) async {
+  testWidgets('User enter password with less than 6 symbols in login page',
+      (tester) async {
     await tester.pumpWidget(
       const Directionality(
         textDirection: TextDirection.ltr, // Set the appropriate text direction
