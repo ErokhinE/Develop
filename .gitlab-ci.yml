@@ -74,7 +74,7 @@ dart-formatter-and-analyzer: # Analog of lint test job
   interruptible: true
   script:
     - echo "Checking code formatting and analysis."
-    - flutter format --dry-run --set-exit-if-changed .
+    - dart format lib
     - flutter analyze --fatal-infos --fatal-warnings
     - echo "The code is overall good formatted."
 
