@@ -43,8 +43,6 @@
 ##  only:
 ##    - live\
 
-#image: cirrusci/flutter:latest
-
 stages:        # List of stages for jobs, and their order of execution
   - test
   - deploy
@@ -56,7 +54,7 @@ stages:        # List of stages for jobs, and their order of execution
 ##  - git checkout stable
 #  - flutter doctor
 #  - flutter doctor -v
-#  - flutter channel
+#  - flutter channel beta
 ##  - flutter upgrade
 #  - flutter config --enable-web
 #  - flutter pub get
@@ -74,7 +72,7 @@ dart-formatter-and-analyzer: # Analog of lint test job
   interruptible: true
   script:
     - echo "Checking code formatting and analysis."
-    - dart format lib
+    - flutter format lib
     - flutter analyze --fatal-infos --fatal-warnings
     - echo "The code is overall good formatted."
 
