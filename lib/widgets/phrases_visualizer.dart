@@ -22,8 +22,8 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
       children: [
         const SizedBox(height: 10),
         Row(
-          children: [
-            const Expanded(
+          children: const [
+            Expanded(
                 child: Padding(
               padding: EdgeInsets.only(left: 70.0),
               child: Text(
@@ -34,8 +34,8 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
                 ),
               ),
             )),
-            const SizedBox(width: 20),
-            const Padding(
+            SizedBox(width: 20),
+            Padding(
               padding: EdgeInsets.only(right: 50.0),
               child: Text(
                 'Count',
