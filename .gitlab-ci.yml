@@ -1,64 +1,7 @@
-##image: cirrusci/flutter:latest
-#
-##before_script:
-##  - flutter channel beta
-##  - flutter upgrade
-##  - flutter config --enable-web
-##  - flutter pub get
-#
-#build_and_test_web_app:
-#  stage: build
-#  image: cirrusci/flutter:stable
-#  before_script:
-#    - flutter config --enable-web
-#    - flutter pub get
-#  script:
-#    - flutter build web
-#    - flutter analyze
-#    - flutter test
-#  artifacts:
-#    paths:
-#      - build/web
-#
-#pages:
-#  stage: deploy
-#  script:
-#    - cp -r build/web public
-#  artifacts:
-#    paths:
-#      - public
-#  only:
-#    - master
-#
-#
-#
-##pages:
-##  stage: deploy
-##  script:
-##    - flutter build web --base-href "/vibechecker/"
-##    - cp -r build/web public
-##  artifacts:
-##    paths:
-##      - public
-##  only:
-##    - live\
-
 stages:        # List of stages for jobs, and their order of execution
   - test
+  - build
   - deploy
-
-#before_script:
-#  #  - npm i -g firebase-tools
-#  - git status
-#  - git fetch --all
-##  - git checkout stable
-#  - flutter doctor
-#  - flutter doctor -v
-#  - flutter channel beta
-##  - flutter upgrade
-#  - flutter config --enable-web
-#  - flutter pub get
-##  - flutter channel beta
 
 image: cirrusci/flutter:latest
 
@@ -69,6 +12,20 @@ cache:
   paths:
     - ~/.pub-cache/
 
+build_and_test_web_app:
+  stage: build
+  image: cirrusci/flutter:stable
+  before_script:
+    - flutter config --enable-web
+    - flutter pub get
+  script:
+    - flutter build web
+    - flutter analyze
+    - flutter test
+  artifacts:
+    paths:
+      - build/web
+
 lint-test-job: # Analog of lint test job
   stage: test
   image: cirrusci/flutter:stable
@@ -77,6 +34,7 @@ lint-test-job: # Analog of lint test job
     - echo "Checking code formatting and analysis of it."
     - dart format lib
     - flutter analyze --fatal-infos --fatal-warnings
+    - flutter analyze
     - echo "The code is overall good formatted. No lint issues found."
 
 unit-test-job:
