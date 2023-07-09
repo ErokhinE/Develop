@@ -43,7 +43,7 @@
 ##  only:
 ##    - live\
 
-image: cirrusci/flutter:latest
+#image: cirrusci/flutter:latest
 
 stages:        # List of stages for jobs, and their order of execution
   - test
