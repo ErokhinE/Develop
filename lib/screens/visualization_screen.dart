@@ -16,6 +16,7 @@ import 'package:http/http.dart' as http;
 
 class VisualizationScreen extends StatefulWidget {
   final String url;
+
   const VisualizationScreen({super.key, required this.url});
 
   @override
@@ -454,12 +455,18 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                   ),
                 );
               } else {
-                return const CircularProgressIndicator();
+                return Container(
+                  decoration: const BoxDecoration(color: Color(0xffEBDFD7)),
+                  child: const Center(child: CircularProgressIndicator()),
+                );
               }
             },
           );
         } else {
-          return const CircularProgressIndicator();
+          return Container(
+            decoration: const BoxDecoration(color: Color(0xffEBDFD7)),
+            child: const Center(child: CircularProgressIndicator()),
+          );
         }
       },
     );
