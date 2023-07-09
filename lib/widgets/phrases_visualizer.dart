@@ -3,7 +3,7 @@ import 'package:vibe_checker/widgets/phrase_tile.dart';
 
 class PhrasesVisualizer extends StatefulWidget {
   final List<List<dynamic>>? wordListData;
-  PhrasesVisualizer({super.key, this.wordListData});
+  const PhrasesVisualizer({super.key, this.wordListData});
 
   @override
   State<PhrasesVisualizer> createState() => _PhrasesVisualizerState();
@@ -21,9 +21,9 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const Row(
+        Row(
           children: [
-            Expanded(
+            const Expanded(
                 child: Padding(
               padding: EdgeInsets.only(left: 70.0),
               child: Text(
@@ -34,8 +34,8 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
                 ),
               ),
             )),
-            SizedBox(width: 20),
-            Padding(
+            const SizedBox(width: 20),
+            const Padding(
               padding: EdgeInsets.only(right: 50.0),
               child: Text(
                 'Count',
