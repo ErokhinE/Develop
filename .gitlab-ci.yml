@@ -3,15 +3,6 @@ stages:        # List of stages for jobs, and their order of execution
   - build
   - deploy
 
-image: cirrusci/flutter:latest
-
-before_script:
-  - flutter pub get
-
-cache:
-  paths:
-    - ~/.pub-cache/
-
 build_and_test_web_app:
   stage: build
   image: cirrusci/flutter:stable
@@ -30,6 +21,8 @@ lint-test-job: # Analog of lint test job
   stage: test
   image: cirrusci/flutter:stable
   interruptible: true
+  before_script:
+    - flutter pub get
   script:
     - echo "Checking code formatting and analysis of it."
     - dart format lib
@@ -41,9 +34,10 @@ unit-test-job:
   stage: test
   image: cirrusci/flutter:stable
   interruptible: true
+  before_script:
+    - flutter pub get
   script:
     - echo "Running unit tests... This will take about 60 seconds."
-#    - flutter packages get
     - flutter test
     - echo "Code coverage is 90%"
 
@@ -53,4 +47,3 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
-
