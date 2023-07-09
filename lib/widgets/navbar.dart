@@ -8,7 +8,7 @@ class NavigationPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(45),
+      margin: const EdgeInsets.all(35),
       width: 1000,
       height: 40,
       decoration: BoxDecoration(

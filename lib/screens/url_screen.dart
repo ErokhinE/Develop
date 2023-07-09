@@ -109,7 +109,7 @@ class _UrlScreenState extends State<UrlScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const SizedBox(height: 70),
+                                const SizedBox(height: 30),
 
                                 Container(
                                   alignment: Alignment.topLeft,
@@ -196,7 +196,7 @@ class _UrlScreenState extends State<UrlScreen> {
               ],
             ),
             const Positioned(
-              top: 10,
+              top: 0,
               left: 15,
               child: Logo(),
             ),

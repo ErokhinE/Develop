@@ -130,8 +130,6 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
       double negative = 0, positive = 0, neutral = 0;
       double rating = 0;
 
-      // print(jsonData);
-
       int it = 1;
       for (var item in jsonData) {
         List<dynamic> row = [];
@@ -169,7 +167,6 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
         );
       });
 
-      // print(pieChartData);
       return pieChartData;
     } catch (exception) {
       return Future.error("Has no comments");
@@ -198,11 +195,8 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
         wordList.add(mapItem);
       }
 
-      // print(wordList);
       return "200";
     } catch (exception) {
-      // print(404);
-      // print('Errors $exception');
       return Future.error("Has no comments");
     }
   }
