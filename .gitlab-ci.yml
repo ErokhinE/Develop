@@ -63,8 +63,6 @@ stages:        # List of stages for jobs, and their order of execution
 image: cirrusci/flutter:latest
 
 before_script:
-  - flutter upgrade
-  - flutter config --enable-web
   - flutter pub get
 
 cache:
