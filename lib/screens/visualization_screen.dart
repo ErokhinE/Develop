@@ -4,6 +4,7 @@ import 'package:vibe_checker/screens/url_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:vibe_checker/widgets/comments_visualizer.dart';
+import 'package:vibe_checker/widgets/error.dart';
 import 'package:vibe_checker/widgets/navigation_button.dart';
 import 'package:vibe_checker/widgets/number_comments.dart';
 import 'package:vibe_checker/widgets/number_phrases.dart';
@@ -171,8 +172,7 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
       // print(pieChartData);
       return pieChartData;
     } catch (exception) {
-      return {};
-      // print('Errors $exception');
+      return Future.error("Has no comments");
     }
   }
 
@@ -202,8 +202,8 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
       return "200";
     } catch (exception) {
       // print(404);
-      return "";
       // print('Errors $exception');
+      return Future.error("Has no comments");
     }
   }
 
@@ -231,7 +231,81 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
     return FutureBuilder<String>(
       future: _futureWordCloud,
       builder: (context, AsyncSnapshot<String> snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasError) {
+          return Scaffold(
+            backgroundColor: const Color(0xffEBDFD7),
+            body: Row(
+              children: [
+                SafeArea(
+                  child: NavigationRail(
+                    extended: _navigationIsOpen,
+                    backgroundColor: const Color(0xff101F36),
+                    destinations: const [
+                      NavigationRailDestination(
+                        icon: Icon(Icons.search),
+                        label: Text('Analyze'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.insert_chart),
+                        label: Text('Visualization'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.layers),
+                        label: Text('Projects'),
+                      ),
+                    ],
+                    selectedIndex: _selectedIndexNavBar,
+                    selectedLabelTextStyle:
+                        const TextStyle(color: Colors.white),
+                    selectedIconTheme: const IconThemeData(color: Colors.black),
+                    unselectedLabelTextStyle:
+                        TextStyle(color: Colors.grey.shade400),
+                    unselectedIconTheme:
+                        const IconThemeData(color: Colors.white),
+                    useIndicator: true,
+                    indicatorColor: const Color(0xffEBDFD7),
+                    groupAlignment: -0.5,
+                    leading: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: NavigationButton(
+                        onTap: () {
+                          setState(() {
+                            _navigationIsOpen =
+                                _navigationIsOpen ? false : true;
+                          });
+                        },
+                        isRight: _navigationIsOpen,
+                      ),
+                    ),
+                    onDestinationSelected: (value) {
+                      setState(() {
+                        _selectedIndexNavBar = value;
+                      });
+                      if (_selectedIndexNavBar == 0) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const UrlScreen()));
+                      } else if (_selectedIndexNavBar == 1) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => VisualizationScreen(
+                                  url: widget.url,
+                                )));
+                      }
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      color: const Color(0xffEBDFD7),
+                      child:
+                          const ErrorMessage(header: "Video has no comments"),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else if (snapshot.hasData) {
           return FutureBuilder<Map<String, double>>(
             future: _futureComments,
             builder: (context, AsyncSnapshot<Map<String, double>> snapshot) {
