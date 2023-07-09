@@ -63,23 +63,26 @@ stages:        # List of stages for jobs, and their order of execution
 image: cirrusci/flutter:latest
 
 before_script:
+  - flutter channel beta
+  - flutter upgrade
+  - flutter config --enable-web
   - flutter pub get
 
 cache:
   paths:
     - ~/.pub-cache/
 
-dart-formatter-and-analyzer: # Analog of lint test job
+lint-test-job: # Analog of lint test job
   stage: test
   image: cirrusci/flutter:stable
   interruptible: true
   script:
-    - echo "Checking code formatting and analysis."
+    - echo "Checking code formatting and analysis of it."
     - dart format lib
     - flutter analyze --fatal-infos --fatal-warnings
-    - echo "The code is overall good formatted."
+    - echo "The code is overall good formatted. No lint issues found."
 
-unit-test:
+unit-test-job:
   stage: test
   image: cirrusci/flutter:stable
   interruptible: true
