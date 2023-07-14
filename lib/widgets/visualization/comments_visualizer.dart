@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vibe_checker/widgets/comment_tile.dart';
+import 'package:vibe_checker/widgets/visualization/comment_tile.dart';
 
 class CommentsVisualizer extends StatefulWidget {
   final List<List<dynamic>>? analyzedData;
-  const CommentsVisualizer({super.key, this.analyzedData});
+  final bool dark;
+
+  const CommentsVisualizer({super.key, this.analyzedData, required this.dark});
 
   @override
   State<CommentsVisualizer> createState() => _CommentsVisualizerState();
@@ -26,6 +28,7 @@ class _CommentsVisualizerState extends State<CommentsVisualizer> {
                     comment: widget.analyzedData?[index][1],
                     sentimentTag: widget.analyzedData?[index][2],
                     sentimentRating: widget.analyzedData?[index][3],
+                    dark: widget.dark,
                   );
                 },
               ),

@@ -48,10 +48,12 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("../play-upload-keystore.jks")
-            storePassword KEYSTORE_PASSWORD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
+            if (project.hasProperty("../play-upload-keystore.jks")) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({super.key});
+  final bool isFull;
+  const Logo({super.key, required this.isFull});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class Logo extends StatelessWidget {
         Stack(
           children: [
             Text(
-              "VibeChecker",
+              isFull ? "VibeChecker" : "VC",
               style: GoogleFonts.pacifico(
                   fontSize: 50,
                   shadows: <Shadow>[
@@ -28,7 +29,7 @@ class Logo extends StatelessWidget {
                     ..color = Colors.white),
             ),
             Text(
-              "VibeChecker",
+              isFull ? "VibeChecker" : "VC",
               style: GoogleFonts.pacifico(
                 color: const Color(0xffF17474),
                 fontSize: 50,

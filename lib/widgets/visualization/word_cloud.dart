@@ -6,22 +6,33 @@ class WordCloud extends StatelessWidget {
   final String header;
   final double width;
   final double height;
-  const WordCloud(
-      {super.key,
-      required this.wcData,
-      required this.header,
-      required this.width,
-      required this.height});
+  final bool dark;
+
+  const WordCloud({
+    super.key,
+    required this.wcData,
+    required this.header,
+    required this.width,
+    required this.height,
+    required this.dark,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = dark ? Colors.white : Colors.black;
+    final Color bgColor =
+        dark ? const Color(0xff101F36) : Colors.white.withOpacity(0.7);
+    final Color borderColor =
+        dark ? const Color(0xff101F36) : const Color(0xffEBDFD7);
+    const Color dividerColor = Color(0xffEBDFD7);
+
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xff101F36)),
-        color: const Color(0xff101F36),
+        border: Border.all(color: borderColor),
+        color: bgColor,
       ),
       child: Column(
         children: [
@@ -30,16 +41,16 @@ class WordCloud extends StatelessWidget {
           ),
           Text(
             header,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
-              color: Colors.white,
+              color: textColor,
             ),
           ),
           const SizedBox(height: 15),
           const Divider(
             height: 10,
             thickness: 2,
-            color: Color(0xffEBDFD7),
+            color: dividerColor,
           ),
           const SizedBox(height: 5),
           WordCloudView(
@@ -48,12 +59,12 @@ class WordCloud extends StatelessWidget {
             mapheight: height - 100,
             fontWeight: FontWeight.bold,
             maxtextsize: 80,
-            mintextsize: 30,
+            mintextsize: 40,
             shape: WordCloudEllipse(majoraxis: 500, minoraxis: 350),
-            colorlist: const [
+            colorlist: [
               Colors.brown,
               Colors.amberAccent,
-              Colors.white60,
+              dark ? Colors.white60 : Colors.black54,
             ],
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:vibe_checker/screens/url_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vibe_checker/widgets/navigation_button.dart';
+import 'package:vibe_checker/widgets/navigation/navigation_button.dart';
 
 void ignoreOverflowErrors(
   FlutterErrorDetails details, {

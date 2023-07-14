@@ -1,4 +1,5 @@
 // import 'package:vibe_checker/screens/url_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vibe_checker/screens/about_us_screen.dart';
 import 'package:vibe_checker/screens/contact_us_screen.dart';
 import 'package:vibe_checker/screens/pricing_screen.dart';
@@ -15,6 +16,8 @@ import 'package:vibe_checker/screens/verify_email_screen.dart';
 
 // import 'package:vibe_checker/services/firebase_streem.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 import 'firebase_options.dart';
 
@@ -38,6 +41,9 @@ void main() async {
   runApp(const MyApp());
 }
 
+
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -46,6 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: GoogleFonts.poppins().fontFamily,
         pageTransitionsTheme: const PageTransitionsTheme(builders: {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         }),

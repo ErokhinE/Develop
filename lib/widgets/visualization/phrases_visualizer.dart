@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vibe_checker/widgets/phrase_tile.dart';
+import 'package:vibe_checker/widgets/visualization/phrase_tile.dart';
 
 class PhrasesVisualizer extends StatefulWidget {
   final List<List<dynamic>>? wordListData;
-  const PhrasesVisualizer({super.key, this.wordListData});
+  final bool dark;
+
+  const PhrasesVisualizer({super.key, this.wordListData, required this.dark});
 
   @override
   State<PhrasesVisualizer> createState() => _PhrasesVisualizerState();
@@ -18,29 +20,31 @@ class _PhrasesVisualizerState extends State<PhrasesVisualizer> {
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = widget.dark ? Colors.white : Colors.black;
+
     return Column(
       children: [
         const SizedBox(height: 10),
         Row(
-          children: const [
+          children: [
             Expanded(
                 child: Padding(
-              padding: EdgeInsets.only(left: 70.0),
+              padding: const EdgeInsets.only(left: 70.0),
               child: Text(
                 'Phrase',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: textColor,
                   fontSize: 20,
                 ),
               ),
             )),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Padding(
-              padding: EdgeInsets.only(right: 50.0),
+              padding: const EdgeInsets.only(right: 50.0),
               child: Text(
                 'Count',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: textColor,
                   fontSize: 20,
                 ),
               ),

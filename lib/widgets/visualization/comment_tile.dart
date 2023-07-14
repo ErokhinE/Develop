@@ -5,6 +5,7 @@ class CommentTile extends StatelessWidget {
   final String sentimentTag;
   final int? id;
   final double sentimentRating;
+  final bool dark;
 
   // final String keyWords;
 
@@ -14,6 +15,7 @@ class CommentTile extends StatelessWidget {
     required this.sentimentTag,
     required this.sentimentRating,
     required this.id,
+    required this.dark,
   });
 
   @override
@@ -28,6 +30,10 @@ class CommentTile extends StatelessWidget {
       }
     }
 
+    final Color textColor = dark ? Colors.white : Colors.black;
+    final Color bgColor =
+        dark ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.1);
+
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25, top: 25),
       child: Container(
@@ -38,16 +44,16 @@ class CommentTile extends StatelessWidget {
           bottom: 12,
         ),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.3),
+          color: bgColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           children: [
             Text(
               '$id',
-              style: const TextStyle(
+              style: TextStyle(
                 decoration: TextDecoration.none,
-                color: Colors.white,
+                color: textColor,
                 fontSize: 14,
               ),
             ),
@@ -57,9 +63,9 @@ class CommentTile extends StatelessWidget {
             Expanded(
                 child: Text(
               comment,
-              style: const TextStyle(
+              style: TextStyle(
                 decoration: TextDecoration.none,
-                color: Colors.white,
+                color: textColor,
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -80,9 +86,9 @@ class CommentTile extends StatelessWidget {
             ),
             Text(
               'Rating: $sentimentRating',
-              style: const TextStyle(
+              style: TextStyle(
                 decoration: TextDecoration.none,
-                color: Colors.white,
+                color: textColor,
                 fontSize: 14,
               ),
             ),
