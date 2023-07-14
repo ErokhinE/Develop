@@ -5,13 +5,13 @@ jobs:
     name: Deploy Website
     runs-on: ubuntu-latest
     steps:
-#      # Checkout Repository
-#      - uses: actions/checkout@v3
-#
-#      # Install Flutter command
-#      - uses: subosito/flutter-action@v2.8.0
-#        with:
-#          channel: 'dev'
+      # Checkout Repository
+      - uses: actions/checkout@v3
+
+      # Install Flutter command
+      - uses: subosito/flutter-action@v2.8.0
+        with:
+          channel: 'dev'
 
       # Build Website
       - name: Build Website
