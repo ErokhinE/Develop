@@ -16,7 +16,7 @@ jobs:
       # Build Website
       - name: Build Website
         run: |
-          flutter channel beta
+          flutter channel master
           flutter upgrade
           flutter config --enable-web
           flutter pub get
