@@ -42,10 +42,10 @@ class _SideNavBarState extends State<SideNavBar> {
           icon: Icon(Icons.insert_chart),
           label: Text('Visualization'),
         ),
-        NavigationRailDestination(
-          icon: Icon(Icons.layers),
-          label: Text('Projects'),
-        ),
+        // NavigationRailDestination(
+        //   icon: Icon(Icons.layers),
+        //   label: Text('Projects'),
+        // ),
       ],
       minWidth: 70,
       minExtendedWidth: 300,
@@ -86,9 +86,10 @@ class _SideNavBarState extends State<SideNavBar> {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const UrlScreen()));
         } else if (index == 1) {
+          String? url = widget.url ?? '';
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => VisualizationScreen(
-                    url: widget.url!,
+                    url: url,
                     numberOfComments: widget.numberOfComments,
                   )));
         }

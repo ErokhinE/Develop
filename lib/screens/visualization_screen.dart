@@ -35,89 +35,11 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
   late Future<Map<String, double>> _futureComments;
   late Future<String> _futureWordCloud;
   List<List<dynamic>> phraseList = [];
-  Map<String, double> pieChartData = {
-    "Positive": 1,
-    "Negative": 1,
-    "Neutral": 1,
-  };
+  Map<String, double> pieChartData = {};
 
   late WordCloudData wordCloudData;
 
-  List<Map> wordList = [
-    {'word': 'Apple', 'value': 100},
-    {'word': 'Samsung', 'value': 60},
-    {'word': 'Intel', 'value': 55},
-    {'word': 'Tesla', 'value': 50},
-    {'word': 'AMD', 'value': 40},
-    {'word': 'Google', 'value': 35},
-    {'word': 'Qualcom', 'value': 31},
-    {'word': 'Netflix', 'value': 27},
-    {'word': 'Meta', 'value': 27},
-    {'word': 'Amazon', 'value': 26},
-    {'word': 'Nvidia', 'value': 25},
-    {'word': 'Microsoft', 'value': 25},
-    {'word': 'TSMC', 'value': 24},
-    {'word': 'PayPal', 'value': 24},
-    {'word': 'AT&T', 'value': 24},
-    {'word': 'Oracle', 'value': 23},
-    {'word': 'Unity', 'value': 23},
-    {'word': 'Roblox', 'value': 23},
-    {'word': 'Lucid', 'value': 22},
-    {'word': 'Naver', 'value': 20},
-    {'word': 'Kakao', 'value': 18},
-    {'word': 'NC Soft', 'value': 18},
-    {'word': 'LG', 'value': 16},
-    {'word': 'Hyundai', 'value': 16},
-    {'word': 'KIA', 'value': 16},
-    {'word': 'twitter', 'value': 16},
-    {'word': 'Tencent', 'value': 15},
-    {'word': 'Alibaba', 'value': 15},
-    {'word': 'LG', 'value': 16},
-    {'word': 'Hyundai', 'value': 16},
-    {'word': 'KIA', 'value': 16},
-    {'word': 'twitter', 'value': 16},
-    {'word': 'Tencent', 'value': 15},
-    {'word': 'Alibaba', 'value': 15},
-    {'word': 'Disney', 'value': 14},
-    {'word': 'Spotify', 'value': 14},
-    {'word': 'Udemy', 'value': 13},
-    {'word': 'Quizlet', 'value': 13},
-    {'word': 'Visa', 'value': 12},
-    {'word': 'Lucid', 'value': 22},
-    {'word': 'Naver', 'value': 20},
-    {'word': 'Hyundai', 'value': 16},
-    {'word': 'KIA', 'value': 16},
-    {'word': 'twitter', 'value': 16},
-    {'word': 'Tencent', 'value': 15},
-    {'word': 'Alibaba', 'value': 15},
-    {'word': 'Disney', 'value': 14},
-    {'word': 'Spotify', 'value': 14},
-    {'word': 'Visa', 'value': 12},
-    {'word': 'Microsoft', 'value': 10},
-    {'word': 'TSMC', 'value': 10},
-    {'word': 'PayPal', 'value': 24},
-    {'word': 'AT&T', 'value': 10},
-    {'word': 'Oracle', 'value': 10},
-    {'word': 'Unity', 'value': 10},
-    {'word': 'Roblox', 'value': 10},
-    {'word': 'Lucid', 'value': 10},
-    {'word': 'Naver', 'value': 10},
-    {'word': 'Kakao', 'value': 18},
-    {'word': 'NC Soft', 'value': 18},
-    {'word': 'LG', 'value': 16},
-    {'word': 'Hyundai', 'value': 16},
-    {'word': 'KIA', 'value': 16},
-    {'word': 'twitter', 'value': 16},
-    {'word': 'Tencent', 'value': 10},
-    {'word': 'Alibaba', 'value': 10},
-    {'word': 'Disney', 'value': 14},
-    {'word': 'Spotify', 'value': 14},
-    {'word': 'Udemy', 'value': 13},
-    {'word': 'NC Soft', 'value': 12},
-    {'word': 'LG', 'value': 16},
-    {'word': 'Hyundai', 'value': 10},
-    {'word': 'KIA', 'value': 16},
-  ];
+  List<Map> wordList = [];
 
   Future<Map<String, double>> sendUrl() async {
     const String url = "http://127.0.0.1:5000/api/data/comments";
@@ -167,7 +89,8 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
 
       setState(() {
         CommentsVisualizer(
-          analyzedData: analyzedDataComments, dark: dark,
+          analyzedData: analyzedDataComments,
+          dark: dark,
         );
       });
 
@@ -175,7 +98,7 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
         wordCloudData = WordCloudData(data: wordList);
       });
 
-      print(wordList);
+      print(wordCloudData);
       return pieChartData;
     } catch (exception) {
       return Future.error("Has no comments");
@@ -207,8 +130,10 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
         wordList.add(mapItem);
       }
 
+      print(wordList);
       return "200";
     } catch (exception) {
+      print(wordList);
       return Future.error("Has no comments");
     }
   }
@@ -226,7 +151,6 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
         dark ? const Color(0xff101F36) : Colors.white.withOpacity(0.7);
     final Color borderColor =
         dark ? const Color(0xff101F36) : const Color(0xffEBDFD7);
-    print(wordList);
     wordCloudData = WordCloudData(data: wordList);
 
     return FutureBuilder<String>(
@@ -247,8 +171,10 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                     child: Center(
                       child: Container(
                         color: const Color(0xffEBDFD7),
-                        child:
-                            ErrorMessage(header: "Video has no comments", dark: dark,),
+                        child: ErrorMessage(
+                          header: "Server is not running",
+                          dark: dark,
+                        ),
                       ),
                     ),
                   ),
@@ -258,6 +184,14 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
           );
         } else if (snapshot.hasData) {
           wordCloudData = WordCloudData(data: wordList);
+          bool invalidUrl = widget.url == '';
+          bool zeroComments = analyzedDataComments.isEmpty;
+          bool invalidProcess = (wordList.isEmpty || zeroComments);
+          print(wordList);
+          print(wordList.isEmpty);
+          print(invalidUrl);
+          print(zeroComments);
+          print(invalidProcess);
           return FutureBuilder<Map<String, double>>(
             future: _futureComments,
             builder: (context, AsyncSnapshot<Map<String, double>> snapshot) {
@@ -272,154 +206,185 @@ class _VisualizationScreenState extends State<VisualizationScreen> {
                           index: 1,
                           numberOfComments: widget.numberOfComments,
                         ),
-                        Expanded(
-                          child: Center(
-                            child: SingleChildScrollView(
-                              child: Container(
-                                color: const Color(0xffEBDFD7),
-                                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context)
-                                    .size
-                                    .width *
-                                    0.05,),
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      NavigationPanel(onTap: () {}),
-
-                                      const SizedBox(height: 20),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          UrlCopy(dark: dark, url: widget.url),
-                                          ProjectName(header: "Project 1", dark: dark),
-                                        ],
+                        (invalidUrl || zeroComments || invalidProcess)
+                            ? Expanded(
+                                child: Center(
+                                  child: Container(
+                                    color: const Color(0xffEBDFD7),
+                                    child: ErrorMessage(
+                                      header: invalidUrl
+                                          ? "Invalid url"
+                                          : "Comments are not available",
+                                      dark: dark,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Expanded(
+                                child: Center(
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      color: const Color(0xffEBDFD7),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            MediaQuery.of(context).size.width *
+                                                0.05,
                                       ),
-
-                                      const SizedBox(height: 30),
-
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            NavigationPanel(onTap: () {}),
+                                            const SizedBox(height: 20),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Container(
-                                                    width: 700,
-                                                    height: 600,
-                                                    decoration: BoxDecoration(
-                                                        color: bgColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                        border: Border.all(
-                                                            color: borderColor)
-                                                    ),
-                                                    child: SingleChildScrollView(
-                                                        child: CommentsVisualizer(
-                                                      analyzedData:
-                                                          analyzedDataComments, dark: dark,
-                                                    ))),
+                                                UrlCopy(
+                                                    dark: dark,
+                                                    url: widget.url),
+                                                ProjectName(
+                                                    header: "Project 1",
+                                                    dark: dark),
                                               ],
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 30,
-                                          ),
-                                          Expanded(
-                                            child: Column(
+                                            const SizedBox(height: 30),
+                                            Row(
                                               children: [
-                                                CommentsNumber(
-                                                  header: 'Total comments',
-                                                  numberOfComments:
-                                                      analyzedDataComments
-                                                          .length,
-                                                  dark: dark,
-                                                ),
-
-                                                const SizedBox(height: 20),
-
-                                                SentimentRating(
-                                                  rating: overallRating,
-                                                  header: 'Overall rating',
-                                                  dark: dark,
-                                                ),
-
-                                                const SizedBox(height: 20),
-
-                                                SentimentPieChart(
-                                                  pieChartData: pieChartData,
-                                                  header: 'Overall sentiment',
-                                                  dark: dark,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 50),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                PhrasesNumber(
-                                                  header: 'Total phrases',
-                                                  numberOfPhrases:
-                                                      phraseList.length,
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-                                                  dark: dark,
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                          width: 700,
+                                                          height: 600,
+                                                          decoration: BoxDecoration(
+                                                              color: bgColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16),
+                                                              border: Border.all(
+                                                                  color:
+                                                                      borderColor)),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                                  child:
+                                                                      CommentsVisualizer(
+                                                            analyzedData:
+                                                                analyzedDataComments,
+                                                            dark: dark,
+                                                          ))),
+                                                    ],
+                                                  ),
                                                 ),
                                                 const SizedBox(
-                                                  height: 20,
+                                                  width: 30,
                                                 ),
-                                                WordCloud(
-                                                  wcData: wordCloudData,
-                                                  header: 'Word cloud',
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-                                                  height: 450,
-                                                  dark: dark,
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      CommentsNumber(
+                                                        header:
+                                                            'Total comments',
+                                                        numberOfComments:
+                                                            analyzedDataComments
+                                                                .length,
+                                                        dark: dark,
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 20),
+                                                      SentimentRating(
+                                                        rating: overallRating,
+                                                        header:
+                                                            'Overall rating',
+                                                        dark: dark,
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 20),
+                                                      SentimentPieChart(
+                                                        pieChartData:
+                                                            pieChartData,
+                                                        header:
+                                                            'Overall sentiment',
+                                                        dark: dark,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 30,
-                                          ),
-                                          Expanded(
-                                            child: Column(
+                                            const SizedBox(height: 50),
+                                            Row(
                                               children: [
-                                                Container(
-                                                    width: 500,
-                                                    height: 600,
-                                                    decoration: BoxDecoration(
-                                                        color: bgColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                        border: Border.all(
-                                                            color: borderColor)),
-                                                    child: SingleChildScrollView(
-                                                        child: PhrasesVisualizer(
-                                                      dark: dark,
-                                                      wordListData: phraseList,
-                                                    ))),
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      PhrasesNumber(
+                                                        header: 'Total phrases',
+                                                        numberOfPhrases:
+                                                            phraseList.length,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        dark: dark,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      WordCloud(
+                                                        wcData: wordCloudData,
+                                                        header: 'Word cloud',
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.4,
+                                                        height: 450,
+                                                        dark: dark,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                          width: 500,
+                                                          height: 600,
+                                                          decoration: BoxDecoration(
+                                                              color: bgColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16),
+                                                              border: Border.all(
+                                                                  color:
+                                                                      borderColor)),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                                  child:
+                                                                      PhrasesVisualizer(
+                                                            dark: dark,
+                                                            wordListData:
+                                                                phraseList,
+                                                          ))),
+                                                    ],
+                                                  ),
+                                                ),
                                               ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 50),
-                                    ]),
+                                            const SizedBox(height: 50),
+                                          ]),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
